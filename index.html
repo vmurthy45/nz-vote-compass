@@ -15,7 +15,8 @@
 :root{
   --bg:#f3f5f1; --surface:#ffffff; --ink:#15231c; --muted:#56655d; --line:#d6ddd7;
   --accent:#1d6b4f; --accent-ink:#ffffff; --mark:#f2b705; --soft:#e5eee8;
-  --pos:#1d6b4f; --neg:#b4402a; --neu:#8a948f;
+  --pos:#1d6b4f; --neg:#b4402a; --neu:#8a948f; --mid:#9a6a00;
+  --pos-bg:#dcefe4; --neg-bg:#f6e0da; --mid-bg:#f6ecd0;
   --c-lab:#d82a20; --c-nat:#00529f; --c-grn:#098137; --c-act:#c9a400; --c-nzf:#3a3a3a; --c-tpm:#8a1b2c; --c-top:#00a189;
   --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body:"Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
@@ -23,13 +24,15 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0f1512; --surface:#18211c; --ink:#e4ebe6; --muted:#9daba3; --line:#2b3831;
   --accent:#5cc49a; --accent-ink:#0b1410; --mark:#f2c94c; --soft:#1f2c25;
-  --pos:#5cc49a; --neg:#ef8a73; --neu:#7f8b85;
+  --pos:#5cc49a; --neg:#ef8a73; --neu:#7f8b85; --mid:#e6b94a;
+  --pos-bg:#1b3a2c; --neg-bg:#3d221c; --mid-bg:#3a3018;
   --c-lab:#ff6b5e; --c-nat:#5aa0ff; --c-grn:#3fc06a; --c-act:#f4d23c; --c-nzf:#c9c9c9; --c-tpm:#e0607a; --c-top:#2fd3b8;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f1512; --surface:#18211c; --ink:#e4ebe6; --muted:#9daba3; --line:#2b3831;
   --accent:#5cc49a; --accent-ink:#0b1410; --mark:#f2c94c; --soft:#1f2c25;
-  --pos:#5cc49a; --neg:#ef8a73; --neu:#7f8b85;
+  --pos:#5cc49a; --neg:#ef8a73; --neu:#7f8b85; --mid:#e6b94a;
+  --pos-bg:#1b3a2c; --neg-bg:#3d221c; --mid-bg:#3a3018;
   --c-lab:#ff6b5e; --c-nat:#5aa0ff; --c-grn:#3fc06a; --c-act:#f4d23c; --c-nzf:#c9c9c9; --c-tpm:#e0607a; --c-top:#2fd3b8;
   color-scheme:dark}
 *{box-sizing:border-box}
@@ -88,6 +91,18 @@ details>summary{cursor:pointer;font-weight:700;list-style-position:outside}
 .ev .stance{font-weight:700}
 .ev blockquote{margin:0;min-width:0}
 .ev blockquote small{display:block;color:var(--muted)}
+.ev{grid-template-columns:8.5rem 9.5rem 1fr}
+.ev .pn{display:flex;gap:8px;align-items:center;font-weight:700}
+.ev .stance{font-weight:400;font-size:.85rem;color:var(--muted)}
+.verdict{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.85rem;padding:3px 9px;border-radius:999px;width:max-content}
+.verdict.agree{background:var(--pos-bg);color:var(--pos)}
+.verdict.partly{background:var(--mid-bg);color:var(--mid)}
+.verdict.disagree{background:var(--neg-bg);color:var(--neg)}
+.verdict.none{color:var(--neu);padding-inline:0}
+.mid{display:grid;gap:4px;align-content:start}
+.summary{display:grid;gap:4px;font-size:.9rem;padding:10px 12px;background:var(--soft);border-radius:8px}
+.summary b{font-weight:700}
+.summary .k-agree{color:var(--pos)} .summary .k-disagree{color:var(--neg)} .summary .k-partly{color:var(--mid)}
 .s2,.s1{color:var(--pos)} .sm1,.sm2{color:var(--neg)} .s0{color:var(--neu)}
 .method{display:grid;gap:10px;font-size:.95rem}
 .method ul{margin:0;padding-left:1.2rem;display:grid;gap:6px}
@@ -187,6 +202,8 @@ function score(){
     Q.forEach(q=>{const a=st.a[q.id],pp=q.pos[p.id];if(a==null||!pp)return;const wt=st.imp[q.id]?2:1;w+=wt;s+=wt*(1-Math.abs(a-pp[0])/4);n++});
     return {p,n,pct:w?Math.round(100*s/w):null}}).sort((x,y)=>(y.pct??-1)-(x.pct??-1)||y.n-x.n);
 }
+const verdict=(a,p)=>{if(a==null)return null;const d=Math.abs(a-p);return d<=1?['agree','\u2713 Agrees with you']:d===2?['partly','\u2248 Partly agrees']:['disagree','\u2715 Disagrees with you']};
+const ORDER={agree:0,partly:1,disagree:2};
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 function showResults(){
@@ -203,10 +220,18 @@ function showResults(){
   $('bars').innerHTML='<div class="axis"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>'+rows;
   $('qlist').innerHTML=Q.map(q=>{
     const a=st.a[q.id];
-    const ev=P.map(p=>{const pp=q.pos[p.id];
-      if(!pp)return `<div class="ev"><span>${esc(p.name)}</span><span class="stance s0">No stated position</span><span></span></div>`;
-      return `<div class="ev"><span>${esc(p.name)}</span><span class="stance ${cls(pp[0])}">${STANCE[pp[0]]}</span><blockquote>“${esc(pp[1])}” ${pp[3]?`<small>${esc(pp[3])}</small>`:''}<small><a href="${pp[2]}" target="_blank" rel="noopener">Source: ${esc(pp[2].replace(/^https:\/\/(www\.)?/,''))}</a></small></blockquote></div>`}).join('');
-    return `<div class="qd"><span class="eyebrow">${esc(q.theme)}</span><h3>${esc(q.text)}</h3><p class="you">You: ${a==null?'skipped':LABELS.find(l=>l[0]===a)[1]}${st.imp[q.id]?' · counts double':''}</p>${ev}</div>`}).join('');
+    const rows=P.map(p=>{const pp=q.pos[p.id];return {p,pp,v:pp?verdict(a,pp[0]):null}});
+    rows.sort((x,y)=>(x.pp?0:1)-(y.pp?0:1)||(x.v&&y.v?ORDER[x.v[0]]-ORDER[y.v[0]]:0));
+    const sw=p=>`<span class="sw" style="background:var(--c-${p.id})"></span>`;
+    const names=k=>rows.filter(r=>r.v&&r.v[0]===k).map(r=>esc(r.p.name)).join(', ');
+    const silent=rows.filter(r=>!r.pp).map(r=>esc(r.p.name)).join(', ');
+    let sum='';
+    if(a!=null){const parts=[['agree','Agree with you'],['partly','Partly agree'],['disagree','Disagree with you']].filter(([k])=>names(k)).map(([k,l])=>`<span><b class="k-${k}">${l}:</b> ${names(k)}</span>`);
+      sum=`<div class="summary">${parts.join('')}${silent?`<span><b>No stated position:</b> ${silent}</span>`:''}</div>`}
+    const ev=rows.map(({p,pp,v})=>{
+      if(!pp)return `<div class="ev"><span class="pn">${sw(p)}${esc(p.name)}</span><span class="verdict none">No stated position</span><span></span></div>`;
+      return `<div class="ev"><span class="pn">${sw(p)}${esc(p.name)}</span><span class="mid">${v?`<span class="verdict ${v[0]}">${v[1]}</span>`:''}<span class="stance">${STANCE[pp[0]]} the statement</span></span><blockquote>\u201C${esc(pp[1])}\u201D ${pp[3]?`<small>${esc(pp[3])}</small>`:''}<small><a href="${pp[2]}" target="_blank" rel="noopener">Source: ${esc(pp[2].replace(/^https:\/\/(www\.)?/,''))}</a></small></blockquote></div>`}).join('');
+    return `<div class="qd"><span class="eyebrow">${esc(q.theme)}</span><h3>${esc(q.text)}</h3><p class="you">You: <strong>${a==null?'skipped':LABELS.find(l=>l[0]===a)[1]}</strong>${st.imp[q.id]?' · counts double':''}</p>${sum}${ev}</div>`}).join('');
   $('results').scrollIntoView({behavior:'smooth'});
 }
 renderQ();
