@@ -42,6 +42,8 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:22px 18px;border-bottom:2px solid var(--ink)}
 .mark{font-weight:800;font-stretch:125%;letter-spacing:-.01em;text-transform:uppercase;font-size:1.05rem}
 .mark span{color:var(--accent)}
+.topr{display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
+.toplink{color:var(--ink)}
 
 /* intro */
 .intro{display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;padding-block:44px 36px;border-bottom:1px solid var(--rule)}
@@ -106,6 +108,22 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .rbar span{position:absolute;inset:0 auto 0 0;background:var(--c)}
 .rpct{font-family:var(--mono);font-weight:500;font-size:1.6rem;text-align:right;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .rpct.na{font-size:.75rem;color:var(--sub);letter-spacing:0}
+.nm{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.lowtag{font-family:var(--mono);font-weight:500;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--partly);border:1px solid currentColor;padding:1px 5px;text-decoration:none;white-space:nowrap}
+.lowtag:hover{color:var(--accent)}
+.why{border:1px solid var(--rule);background:var(--sheet)}
+.why>summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.why>summary::-webkit-details-marker{display:none}
+.why>summary::after{content:"+";font-family:var(--mono);font-weight:400}
+.why[open]>summary::after{content:"\2212"}
+.whybody{padding:4px 16px 18px;display:grid;gap:12px;color:var(--sub);max-width:46rem}
+.whybody strong,.whybody em{color:var(--ink)}
+.whybody code{font-family:var(--mono);font-size:.82rem;color:var(--ink);background:var(--faint);padding:1px 5px}
+.tw{overflow-x:auto}
+.tw table{border-collapse:collapse;font-family:var(--mono);font-size:.78rem;font-variant-numeric:tabular-nums;min-width:30rem}
+.tw th,.tw td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink)}
+.tw th:first-child{text-align:left;font-weight:400;color:var(--sub)}
+.tw thead th{font-weight:500}
 .restart{font-weight:600;text-decoration:underline;text-underline-offset:4px}
 
 /* breakdown */
@@ -139,6 +157,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .ev blockquote a{font-family:var(--mono);font-size:.72rem;color:var(--sub);word-break:break-all}
 
 /* method */
+.method .why{grid-column:1/-1}
 .method{display:grid;grid-template-columns:1fr 2fr;gap:24px 48px;padding-block:44px;border-top:2px solid var(--ink);margin-top:24px}
 .method h2{font-size:1.6rem;font-weight:800;font-stretch:72%;text-transform:uppercase;line-height:1}
 .method ol{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:m}
@@ -169,7 +188,7 @@ footer{border-top:1px solid var(--rule);padding-top:16px}
 <div class="wrap">
   <header class="top">
     <span class="mark">Policy<span>/</span>Compass</span>
-    <span class="label">NZ general election · 7 Nov 2026</span>
+    <span class="topr"><a class="label toplink" href="#scoring">How scoring works</a><span class="label">NZ general election · 7 Nov 2026</span></span>
   </header>
 
   <section class="intro">
@@ -199,7 +218,7 @@ footer{border-top:1px solid var(--rule);padding-top:16px}
 
   <section class="results" id="results" hidden>
     <div class="rhead"><h2>Your match</h2><button class="restart" id="restart">Start over</button></div>
-    <p class="rnote" id="resnote"></p>
+    <p class="rnote"><span id="resnote"></span> <a href="#scoring">How scores are worked out</a></p>
     <div class="linewrap"><div class="line" id="line"></div></div>
     <div class="rank" id="bars"></div>
     <details class="bd" open><summary>Statement by statement, with sources</summary><div id="qlist"></div></details>
@@ -212,9 +231,23 @@ footer{border-top:1px solid var(--rule);padding-top:16px}
       <li><span>If a party hasn't published a position on a statement, it's marked <em>no stated position</em> and that statement doesn't count towards its score.</span></li>
       <li><span>Positions are coded <strong>supports</strong> or <strong>opposes</strong> when the policy says so directly, and <strong>leans</strong> when it's partial, conditional, or a goal to work towards.</span></li>
       <li><span>A party <strong>agrees with you</strong> when its position is within one step of your answer on the five-point scale, <strong>partly agrees</strong> at two steps, and <strong>disagrees</strong> at three or more.</span></li>
-      <li><span>Your match is the average closeness across the statements you both have a view on. Opposite answers score 0%; identical answers score 100%.</span></li>
+      <li><span>Your match is the average closeness across the statements you both have a view on, pulled towards 50% when it rests on few statements. Results based on fewer than 10 are marked <strong>low confidence</strong>. <a href="#scoring" id="scoringlink">See how scores are worked out</a>.</span></li>
       <li><span>Parties publish different amounts of detail, so each result shows how many statements it rests on. Check the sources and full platforms before you vote.</span></li>
     </ol>
+      <details class="why" id="scoring">
+      <summary>How is the score worked out, and what does “low confidence” mean?</summary>
+      <div class="whybody">
+        <p><strong>Step 1: raw match.</strong> For each statement where a party has a published position and you gave an answer, we measure how close you are. The same answer scores 100%, opposite ends of the scale score 0%. The raw match is the average of those, with statements you marked as important counting double.</p>
+        <p><strong>Step 2: allow for thin evidence.</strong> Parties publish very different amounts of detail. A party with positions on only a handful of statements can reach a very high or very low raw score by chance, because there were few chances to disagree. So the score you see is pulled towards 50% when it rests on few statements, and left almost unchanged when it rests on many.</p>
+        <div class="tw"><table>
+          <thead><tr><th>Statements in common</th><th>3</th><th>5</th><th>9</th><th>15</th><th>26</th></tr></thead>
+          <tbody><tr><th>Raw score counts for</th><td>38%</td><td>50%</td><td>64%</td><td>75%</td><td>84%</td></tr>
+          <tr><th>A raw 94% becomes</th><td>67%</td><td>72%</td><td>78%</td><td>83%</td><td>87%</td></tr></tbody>
+        </table></div>
+        <p>The formula is <code>shown = 50% + (raw − 50%) × n ÷ (n + 5)</code>, where <em>n</em> is the number of statements in common. Each result also shows its raw score.</p>
+        <p><strong>Low confidence</strong> marks any party with fewer than 10 statements in common with you. That usually means the party hasn't published a position on most of these issues, not that it agrees or disagrees with you. Read its quotes in the statement-by-statement breakdown and check its full platform.</p>
+      </div>
+    </details>
   </section>
   <footer class="label">Independent tool. Not affiliated with any party or the Electoral Commission.</footer>
 </div>
@@ -229,6 +262,7 @@ const LABELS=[[-2,'Strongly disagree'],[-1,'Disagree'],[0,'Neutral'],[1,'Agree']
 const KEYS={'-2':'−2','-1':'−1','0':'0','1':'+1','2':'+2'};
 const STANCE={2:'Supports',1:'Leans support',0:'Neutral','-1':'Leans against','-2':'Opposes'};
 const $=id=>document.getElementById(id);
+const K=5, LOW=10; // K: how strongly thin evidence is pulled towards 50%. LOW: below this many statements, flag low confidence.
 const pad=n=>String(n).padStart(2,'0');
 let st={i:0,a:{},imp:{},done:false};
 try{const s=JSON.parse(localStorage.getItem('pc-nz-2026')||'null'); if(s&&s.a) st=s;}catch(e){}
@@ -262,7 +296,9 @@ function renderQ(){
 function score(){
   return P.map(p=>{let w=0,s=0,n=0;
     Q.forEach(q=>{const a=st.a[q.id],pp=q.pos[p.id];if(a==null||!pp)return;const wt=st.imp[q.id]?2:1;w+=wt;s+=wt*(1-Math.abs(a-pp[0])/4);n++});
-    return {p,n,pct:w?Math.round(100*s/w):null}}).sort((x,y)=>(y.pct??-1)-(x.pct??-1)||y.n-x.n);
+    if(!w)return {p,n,pct:null,raw:null};
+    const raw=s/w, adj=0.5+(raw-0.5)*n/(n+K);
+    return {p,n,pct:Math.round(100*adj),raw:Math.round(100*raw)}}).sort((x,y)=>(y.pct??-1)-(x.pct??-1)||y.n-x.n);
 }
 const verdict=(a,p)=>{if(a==null)return null;const d=Math.abs(a-p);return d<=1?['agree','Agrees with you']:d===2?['partly','Partly agrees']:['disagree','Disagrees with you']};
 const ORDER={agree:0,partly:1,disagree:2};
@@ -289,13 +325,13 @@ function showResults(){
   st.done=true;save();
   const answered=Object.keys(st.a).length;
   $('quiz').hidden=true;$('results').hidden=false;
-  $('resnote').textContent=answered?`Based on your ${answered} answered statement${answered>1?'s':''}. A party needs at least 3 statements in common with you to get a score.`:'You haven’t answered any statements yet. Start over and answer a few to see a match.';
+  $('resnote').textContent=answered?`Based on your ${answered} answered statement${answered>1?'s':''}. Scores resting on few statements are pulled towards 50%, and a party needs at least 3 statements in common with you to get a score at all.`:'You haven’t answered any statements yet. Start over and answer a few to see a match.';
   const rs=score().map(r=>({...r,ok:r.pct!=null&&r.n>=3}));
   drawLine(rs);
   window.onresize=()=>{clearTimeout(window.__rl);window.__rl=setTimeout(()=>drawLine(rs),150)};
   $('bars').innerHTML=rs.map((r,i)=>`<div class="rrow" style="--c:var(--c-${r.p.id})">
       <span class="rn">${r.ok?pad(i+1):'—'}</span>
-      <span class="rname">${esc(r.p.name)}<small>${r.n} statement${r.n===1?'':'s'} in common</small></span>
+      <span class="rname"><span class="nm">${esc(r.p.name)}${r.ok&&r.n<LOW?'<a class="lowtag" href="#scoring">Low confidence</a>':''}</span><small>${r.n} statement${r.n===1?'':'s'} in common${r.ok?` · raw ${r.raw}%`:''}</small></span>
       <span class="rbar">${r.ok?`<span style="width:${r.pct}%"></span>`:''}</span>
       <span class="rpct ${r.ok?'':'na'}">${r.ok?r.pct+'%':'Too few'}</span></div>`).join('');
   $('qlist').innerHTML=Q.map((q,qi)=>{
@@ -316,6 +352,7 @@ function showResults(){
     return `<article class="qd"><div class="side"><span class="n">${pad(qi+1)}</span><span class="label">${esc(q.theme)}</span></div><div class="main"><h3>${esc(q.text)}</h3><p class="you">You answered<b>${a==null?'Skipped':LABELS.find(l=>l[0]===a)[1]}</b>${st.imp[q.id]?' · counts double':''}</p>${groups}<div>${ev}</div></div></article>`}).join('');
   $('results').scrollIntoView({behavior:'smooth'});
 }
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#scoring"]');if(!a)return;e.preventDefault();const d=$('scoring');d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'})});
 renderQ();
 if(st.done)showResults();
 })();
