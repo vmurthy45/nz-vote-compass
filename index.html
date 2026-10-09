@@ -122,7 +122,8 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .rpct{font-family:var(--mono);font-weight:500;font-size:1.6rem;text-align:right;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .rpct.na{font-size:.75rem;color:var(--sub);letter-spacing:0}
 .nm{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
-.lowtag{font-family:var(--mono);font-weight:500;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--partly);border:1px solid currentColor;padding:1px 5px;text-decoration:none;white-space:nowrap}
+.lowtag{font-family:var(--mono);font-weight:400;font-size:.68rem;color:var(--partly);text-decoration:none;white-space:nowrap}
+.lowtag::before{content:"";display:inline-block;width:6px;height:6px;background:currentColor;margin-right:5px;transform:translateY(-1px)}
 .lowtag:hover{color:var(--accent)}
 .why{border:1px solid var(--rule);background:var(--sheet)}
 .why>summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
@@ -250,7 +251,7 @@ footer{border-top:1px solid var(--rule);padding-top:16px}
       <li><span>If a party hasn't published a position on a statement, it's marked <em>no stated position</em> and that statement doesn't count towards its score.</span></li>
       <li><span>Positions are coded <strong>supports</strong> or <strong>opposes</strong> when the policy says so directly, and <strong>leans</strong> when it's partial, conditional, or a goal to work towards.</span></li>
       <li><span>A party <strong>agrees with you</strong> when its position is within one step of your answer on the five-point scale, <strong>partly agrees</strong> at two steps, and <strong>disagrees</strong> at three or more.</span></li>
-      <li><span>Your match is the average closeness across the statements you both have a view on, pulled towards 50% when it rests on few statements. Results based on fewer than 10 are marked <strong>few published positions</strong>. <a href="#scoring" id="scoringlink">See how scores are worked out</a>.</span></li>
+      <li><span>Your match is the average closeness across the statements you both have a view on, pulled towards 50% when it rests on few statements. Parties that have published positions on fewer than 10 of the statements are marked <strong>few published positions</strong>. <a href="#scoring" id="scoringlink">See how scores are worked out</a>.</span></li>
       <li><span>Parties publish different amounts of detail, so each result shows how many statements it rests on. Check the sources and full platforms before you vote.</span></li>
     </ol>
       <details class="why" id="scoring">
@@ -259,12 +260,12 @@ footer{border-top:1px solid var(--rule);padding-top:16px}
         <p><strong>Step 1: raw match.</strong> For each statement where a party has a published position and you gave an answer, we measure how close you are. The same answer scores 100%, opposite ends of the scale score 0%. The raw match is the average of those, with statements you marked as important counting double.</p>
         <p><strong>Step 2: allow for thin evidence.</strong> Parties publish very different amounts of detail. A party with positions on only a handful of statements can reach a very high or very low raw score by chance, because there were few chances to disagree. So the score you see is pulled towards 50% when it rests on few statements, and left almost unchanged when it rests on many.</p>
         <div class="tw"><table>
-          <thead><tr><th>Statements in common</th><th>3</th><th>5</th><th>9</th><th>15</th><th>26</th></tr></thead>
+          <thead><tr><th>Answers in common</th><th>3</th><th>5</th><th>9</th><th>15</th><th>26</th></tr></thead>
           <tbody><tr><th>Raw score counts for</th><td>38%</td><td>50%</td><td>64%</td><td>75%</td><td>84%</td></tr>
           <tr><th>A raw 94% becomes</th><td>67%</td><td>72%</td><td>78%</td><td>83%</td><td>87%</td></tr></tbody>
         </table></div>
-        <p>The formula is <code>shown = 50% + (raw − 50%) × n ÷ (n + 5)</code>, where <em>n</em> is the number of statements in common. Each result also shows its raw score.</p>
-        <p><strong>Few published positions</strong> marks any party with fewer than 10 statements in common with you. It describes how much the party has published on these issues, not how reliable the party is. Larger parties often publish a list of specific campaign promises rather than a full platform, so there is less to compare. Read the party's quotes in the statement-by-statement breakdown and check its full platform.</p>
+        <p>The formula is <code>shown = 50% + (raw − 50%) × n ÷ (n + 5)</code>, where <em>n</em> is the number of your answers on statements where the party has a position. Each result also shows its raw score.</p>
+        <p><strong>Few published positions</strong> marks any party that has published a position on fewer than 10 of the statements in this compass, whatever you answered. It describes how much the party has published on these issues, not how reliable the party is. Larger parties often publish a list of specific campaign promises rather than a full platform, so there is less to compare. Read the party's quotes in the statement-by-statement breakdown and check its full platform.</p>
       </div>
     </details>
     <details class="why" id="sources">
@@ -285,13 +286,15 @@ const LABELS=[[-2,'Strongly disagree'],[-1,'Disagree'],[0,'Neutral'],[1,'Agree']
 const KEYS={'-2':'−2','-1':'−1','0':'0','1':'+1','2':'+2'};
 const STANCE={2:'Supports',1:'Leans support',0:'Neutral','-1':'Leans against','-2':'Opposes'};
 const $=id=>document.getElementById(id);
-const K=5, LOW=10; // K: how strongly thin evidence is pulled towards 50%. LOW: below this many statements, flag few published positions.
+const K=5, LOW=10; // K: how strongly thin evidence is pulled towards 50%. LOW: parties with positions on fewer than this many statements get the few-published-positions note.
+const PUB={}; // published positions per party, across all statements
 const pad=n=>String(n).padStart(2,'0');
 let st={i:0,a:{},imp:{},done:false};
 try{const s=JSON.parse(localStorage.getItem('pc-nz-2026')||'null'); if(s&&s.a) st=s;}catch(e){}
 const save=()=>{try{localStorage.setItem('pc-nz-2026',JSON.stringify(st))}catch(e){}};
 $('acc').textContent=D.accessed;
 $('ncount').textContent=N;
+P.forEach(p=>PUB[p.id]=Q.filter(q=>q.pos[p.id]).length);
 $('tally').style.setProperty('--n',N);
 (function(){
   const NOTE={tpm:'Quotes come from the full policy documents linked from each page.',grn:'Quotes come from the 2026 manifesto, campaign announcement pages and standing policy pages.'};
@@ -364,7 +367,7 @@ function showResults(){
   window.onresize=()=>{clearTimeout(window.__rl);window.__rl=setTimeout(()=>drawLine(rs),150)};
   $('bars').innerHTML=rs.map((r,i)=>`<div class="rrow" style="--c:var(--c-${r.p.id})">
       <span class="rn">${r.ok?pad(i+1):'—'}</span>
-      <span class="rname"><span class="nm">${esc(r.p.name)}${r.ok&&r.n<LOW?'<a class="lowtag" href="#scoring">Few published positions</a>':''}</span><small>${r.n} statement${r.n===1?'':'s'} in common${r.ok?` · raw ${r.raw}%`:''}</small></span>
+      <span class="rname"><span class="nm">${esc(r.p.name)}</span><small>Based on ${r.n} of your answers${PUB[r.p.id]<LOW?' · <a class="lowtag" href="#scoring">Few published positions</a>':''}</small></span>
       <span class="rbar">${r.ok?`<span style="width:${r.pct}%"></span>`:''}</span>
       <span class="rpct ${r.ok?'':'na'}">${r.ok?r.pct+'%':'Too few'}</span></div>`).join('');
   $('qlist').innerHTML=Q.map((q,qi)=>{
