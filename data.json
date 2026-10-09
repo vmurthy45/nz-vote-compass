@@ -1,0 +1,182 @@
+{
+  "accessed": "9 October 2026",
+  "parties": [
+    {"id": "lab", "name": "Labour", "home": "https://www.labour.org.nz/our-policies/"},
+    {"id": "nat", "name": "National", "home": "https://www.national.org.nz/policies"},
+    {"id": "grn", "name": "Green Party", "home": "https://www.greens.org.nz/policy"},
+    {"id": "act", "name": "ACT", "home": "https://www.act.org.nz/policies"},
+    {"id": "nzf", "name": "NZ First", "home": "https://www.nzfirst.nz/policy"},
+    {"id": "tpm", "name": "Te Pāti Māori", "home": "https://www.maoriparty.org.nz/policy"},
+    {"id": "top", "name": "Opportunity (TOP)", "home": "https://www.opportunity.org.nz/policy"}
+  ],
+  "questions": [
+    {"id": "wealth_tax", "theme": "Economy & tax", "text": "New taxes on wealth or property, such as a capital gains tax, wealth tax or land value tax, should be introduced to help fund public services.", "pos": {
+      "lab": [2, "A simple, targeted 28% tax on profit from selling investment property after 1 July 2027.", "https://www.labour.org.nz/our-policies/"],
+      "grn": [2, "Introduce a super-rich tax of 2.5% on net wealth over $10 million so that multimillionaires pay their fair share.", "https://www.greens.org.nz/manifesto_2026_income"],
+      "tpm": [2, "Implement a net wealth tax on the wealthiest individuals to address extreme inequality and fund essential public services.", "https://www.maoriparty.org.nz/tax"],
+      "top": [2, "a Land Value Tax to lower house prices", "https://www.opportunity.org.nz/tax-reset"],
+      "nat": [-2, "National is committing to no new taxes if re-elected on November 7.", "https://www.national.org.nz/policies/no-new-taxes"],
+      "act": [-2, "Balance the Government’s books without new taxes and return to surplus faster.", "https://www.act.org.nz/make-farming-fun-again"]
+    }},
+    {"id": "sme_tax", "theme": "Economy & tax", "text": "The company tax rate should be cut, at least for small and medium businesses.", "pos": {
+      "nzf": [2, "lowering the company tax rate for SMEs to 20% for companies with turnover under $30million, from its current 28% tax rate.", "https://www.nzfirst.nz/20_tax_rate_for_smes"],
+      "tpm": [-2, "Return the company tax from 28% back to 33%.", "https://www.maoriparty.org.nz/tax"]
+    }},
+    {"id": "kiwisaver", "theme": "Economy & tax", "text": "KiwiSaver contributions should be compulsory.", "pos": {
+      "nat": [2, "From 1 July 2028, National will make contributions to KiwiSaver (or an equivalent scheme) compulsory for all workers.", "https://www.national.org.nz/policies/kiwisaver"],
+      "nzf": [2, "compulsory KiwiSaver enrolment for the wider workforce and increasing employee and employer contributions to 8% initially and eventually to 10%.", "https://www.nzfirst.nz/establishing_a_kiwisaver_generation"],
+      "top": [2, "Kiwisaver 2.0, a compulsory superannuation system.", "https://www.opportunity.org.nz/tax-reset"],
+      "lab": [1, "Employer contributions become compulsory from 1 July 2028, including when an employee reduces or pauses their own contributions", "https://www.labour.org.nz/strengthening-kiwisaver", "Compulsory for employers only; employees can still reduce or pause."],
+      "act": [-2, "Other parties want to force your money into KiwiSaver, then tax you. ACT says it should be your choice", "https://www.act.org.nz/no-tax-on-kiwisaver-earnings"]
+    }},
+    {"id": "min_wage", "theme": "Economy & tax", "text": "The minimum wage should be raised to the living wage.", "pos": {
+      "tpm": [2, "Immediately raise the minimum wage to the living wage ($28.95 per hour)", "https://www.maoriparty.org.nz/cost_of_living"],
+      "grn": [1, "Work towards matching the minimum wage to the living wage.", "https://www.greens.org.nz/manifesto_2026_workforce_rights", "A goal to work towards, not an immediate change."],
+      "act": [-2, "Freeze the adult minimum wage for three years", "https://www.act.org.nz/backing-small-business"]
+    }},
+    {"id": "welfare", "theme": "Economy & tax", "text": "People on benefits should face stricter work obligations, with sanctions or reduced payments if they don't meet them.", "pos": {
+      "nat": [2, "From 1 April 2028, jobseekers who have received Jobseeker for two of the previous three years will move to a lower rate of payment", "https://www.national.org.nz/policies/walfare"],
+      "act": [2, "if you can work, you should be taking real steps toward work, and taxpayer support should go to the essentials it was intended to fund.", "https://www.act.org.nz/welfare"],
+      "grn": [-2, "Increase benefits to liveable rates, individualise benefit entitlements and abolish benefit sanctions.", "https://www.greens.org.nz/manifesto_2026_income"],
+      "tpm": [-2, "Remove financial penalties, sanctions, and work-test obligations.", "https://www.maoriparty.org.nz/cost_of_living"]
+    }},
+    {"id": "spending", "theme": "Economy & tax", "text": "Government spending should shrink as a share of the economy.", "pos": {
+      "nat": [2, "Keep taxes low by right-sizing government, with core Crown expenditure as a share of the economy declining towards 30 per cent of GDP", "https://www.national.org.nz/policies/responsibility-rules"],
+      "act": [2, "New Zealand needs a smaller, more efficient government", "https://www.act.org.nz/affordable-government"],
+      "lab": [-1, "keep core Crown expenditure and revenue at around 33% of GDP in the medium term", "https://www.labour.org.nz/our-policies/", "Holds spending steady rather than cutting it."],
+      "grn": [-1, "Public services should be treated as investments in our shared future, not costs to cut.", "https://www.greens.org.nz/manifesto_2026_public_services"]
+    }},
+    {"id": "rates_cap", "theme": "Economy & tax", "text": "Councils should be legally capped in how much they can raise rates each year.", "pos": {
+      "nat": [2, "requiring councils to keep annual rates increases within a target range of 2-4%", "https://www.national.org.nz/policies/rates-capping"],
+      "grn": [-2, "Reject the proposed rates cap", "https://www.greens.org.nz/manifesto_2026_local_government"]
+    }},
+    {"id": "supermarkets", "theme": "Economy & tax", "text": "The government should step in directly to break up the supermarket duopoly.", "pos": {
+      "nzf": [2, "break up Foodstuffs into two nationwide cooperatives based on brand", "https://www.nzfirst.nz/break_up_the_supermarket_duopoly"],
+      "lab": [2, "Our first step to break up the supermarkets will be to free small grocers from anti-competitive restraints that keep prices high.", "https://www.labour.org.nz/fairer-grocery-prices"],
+      "grn": [2, "Create KiwiMart, a publicly owned supermarket chain with a single mandate - keep prices down.", "https://www.greens.org.nz/affordable_food_for_all_of_us"],
+      "nat": [1, "if the Commerce Commission confirms that a separation stacks up, we will pursue it. If it doesn’t, we won’t.", "https://www.national.org.nz/policies/grocery-competition", "Would split New World and PAK’nSAVE, subject to the Commerce Commission."],
+      "top": [1, "the power to break up duopolies and other uncompetitive markets via the High Court.", "https://www.opportunity.org.nz/breakthrough-economy", "Gives the Commerce Commission the power; break-up decided case by case."],
+      "tpm": [1, "Break corporate control by supporting Māori-owned supermarkets and protecting local kai sellers.", "https://www.maoriparty.org.nz/kai_sovereignt"],
+      "act": [-2, "Rather than joining the race to the bottom where we attack successful businesses, ACT’s policy is to make it easier for new businesses to come here, compete, and expand.", "https://www.act.org.nz/open-the-door-to-supermarket-competition"]
+    }},
+    {"id": "gentailers", "theme": "Economy & tax", "text": "The big power companies should be split into separate electricity generators and retailers.", "pos": {
+      "nzf": [2, "We will split the big power companies up into generators and retailers.", "https://www.nzfirst.nz/breaking_up_the_gentailers"],
+      "tpm": [1, "We will ensure regulators have the power to intervene more structurally if regulation does not deliver fair prices", "https://www.maoriparty.org.nz/energy_sovereignty", "Structural intervention only if regulation fails."],
+      "act": [-2, "Oppose forced break-ups of the major companies that generate and sell electricity.", "https://www.act.org.nz/abundant-and-affordable-electricity"],
+      "top": [-2, "No. Structural separation is a lengthy and costly solution, and doesn't address the core issues in the electricity sector.", "https://www.opportunity.org.nz/abundant-energy"]
+    }},
+    {"id": "paris", "theme": "Climate & environment", "text": "New Zealand should stay in the Paris Agreement and meet its climate commitments.", "pos": {
+      "top": [2, "calls for New Zealand to recommit to our Paris Agreement obligations and protect the role of the Climate Change Commission.", "https://www.opportunity.org.nz/bottom_lines"],
+      "grn": [2, "Ensure Aotearoa meets our Paris Agreement commitments through strong domestic action", "https://www.greens.org.nz/manifesto_2020_climate_action_emissions_reduction"],
+      "act": [-1, "Renegotiate New Zealand’s commitment under the Paris Agreement. If a fairer arrangement cannot be reached, New Zealand should be prepared to leave.", "https://www.act.org.nz/scrap-net-zero-cut-the-carbon-tax", "Would leave if a renegotiation fails."],
+      "nzf": [-2, "New Zealand First is saying we need to get out of the Paris Accord altogether", "https://www.nzfirst.nz/withdraw_from_paris_accord"]
+    }},
+    {"id": "ag_emissions", "theme": "Climate & environment", "text": "Farm greenhouse gas emissions (such as methane) should be priced.", "pos": {
+      "grn": [2, "Introduce a price on agricultural emissions to ensure methane reduction targets are met", "https://www.greens.org.nz/manifesto_2020_climate_action_emissions_reduction"],
+      "top": [1, "Back farmers to cut biogenic methane and nitrous oxide emissions through cap-and-trade systems, biodiversity markets and innovative technology.", "https://www.opportunity.org.nz/climate_action", "Cap-and-trade alongside other tools."],
+      "act": [-2, "Keep agriculture permanently out of the Emissions Trading Scheme and oppose any agricultural emissions tax or pricing scheme.", "https://www.act.org.nz/make-farming-fun-again"]
+    }},
+    {"id": "oil_gas", "theme": "Climate & environment", "text": "New oil and gas exploration should be banned.", "pos": {
+      "grn": [2, "Ban new fossil fuel extraction, end subsidies for fossil fuels and cancel the LNG terminal.", "https://www.greens.org.nz/manifesto_2026_energy"],
+      "tpm": [2, "End new oil and gas exploration and phase out existing extraction.", "https://www.maoriparty.org.nz/climate"],
+      "act": [-2, "Keep onshore and offshore petroleum exploration open where commercially viable opportunities emerge.", "https://www.act.org.nz/unlocking-mineral-wealth"],
+      "nzf": [-2, "We will find those energy reserves, we will extract them", "https://www.nzfirst.nz/future_proofing_our_fuel_security"]
+    }},
+    {"id": "mining", "theme": "Climate & environment", "text": "It should be faster and easier to get approval for new mines.", "pos": {
+      "act": [2, "Keep fast-track consenting available for eligible projects and establish clear deadlines for government decisions.", "https://www.act.org.nz/unlocking-mineral-wealth"],
+      "nzf": [2, "New mining zones will have clearer rules around where mining can occur, recognising regions where mining is already a key part of the economy.", "https://www.nzfirst.nz/returning_50_of_mining_royalties_to_the_regions"],
+      "nat": [1, "National will develop a new Government Policy Statement on Mining and Extraction under the Fast Track Approvals Act", "https://www.national.org.nz/policies/hunters-and-anglers"],
+      "top": [-1, "Strengthen environmental checks on major decisions by limiting ministerial override on fast-track projects", "https://www.opportunity.org.nz/healthy_land"],
+      "grn": [-2, "Repeal the Fast-track Approvals Act and revoke consents for fast-track approvals for new coal, gold and seabed mining projects.", "https://www.greens.org.nz/manifesto_2026_environmental_protection"],
+      "tpm": [-2, "Retrospectively revoke all fast-tracked mining consents.", "https://www.maoriparty.org.nz/climate"]
+    }},
+    {"id": "seabed", "theme": "Climate & environment", "text": "Seabed mining should be banned.", "pos": {
+      "tpm": [2, "Ban Sea-bed Mining in Aotearoa", "https://www.maoriparty.org.nz/climate"],
+      "grn": [2, "Ban seabed mining in the coastal marine area and the exclusive economic zone", "https://www.greens.org.nz/manifesto_2026_oceans_and_fisheries"],
+      "top": [2, "opposing all seabed mining", "https://www.opportunity.org.nz/healthy-oceans"]
+    }},
+    {"id": "freshwater", "theme": "Climate & environment", "text": "Freshwater rules should put the health of waterways first, by restoring Te Mana o te Wai.", "pos": {
+      "top": [2, "Reinstate Te Mana o te Wai to put the health of waterways first in freshwater policy", "https://www.opportunity.org.nz/healthy_land"],
+      "grn": [2, "Reinstate Te Mana o Te Wai to prioritise the health of freshwater in decision-making and regulation", "https://www.greens.org.nz/manifesto_2026_freshwater"],
+      "act": [-2, "Remove Te Mana o te Wai and other vague spiritual concepts from freshwater regulation, and prevent them returning under another name.", "https://www.act.org.nz/make-farming-fun-again"]
+    }},
+    {"id": "tribunal", "theme": "Te Tiriti & democracy", "text": "The Waitangi Tribunal should be wound up or abolished.", "pos": {
+      "nzf": [2, "immediately abolish the Waitangi Tribunal, and replace it with the Treaty of Waitangi Completion Commission.", "https://www.nzfirst.nz/ending_the_waitangi_makework_industry"],
+      "act": [2, "Amend the Treaty of Waitangi Act so the Tribunal is automatically disestablished once all eligible historical claims have been completed", "https://www.act.org.nz/wind-up-the-waitangi-tribunal"],
+      "grn": [-2, "Increase resourcing for the Waitangi Tribunal, providing them with the power to make binding recommendations", "https://www.greens.org.nz/manifesto_2026_te_tiriti_o_waitangi"],
+      "tpm": [-2, "Amend the Treaty of Waitangi Act 1975 so that Waitangi Tribunal recommendations are binding on the Crown", "https://www.maoriparty.org.nz/te_tiriti_entrenchment"]
+    }},
+    {"id": "tiriti", "theme": "Te Tiriti & democracy", "text": "Te Tiriti o Waitangi obligations should have stronger legal force over government decisions.", "pos": {
+      "tpm": [2, "The Crown must be legally accountable when it breaches its Te Tiriti obligations.", "https://www.maoriparty.org.nz/te_tiriti_entrenchment"],
+      "grn": [2, "Implement genuine Te Tiriti-based decision-making models across government", "https://www.greens.org.nz/manifesto_2026_te_tiriti_o_waitangi"],
+      "top": [1, "Our position is to ensure that all legislation gives proper effect to Treaty obligations.", "https://www.opportunity.org.nz/honouring_te_tiriti"],
+      "act": [-2, "Stop courts using broad Treaty interpretations to impose obligations Parliament never actually legislated.", "https://www.act.org.nz/one-law-for-all"]
+    }},
+    {"id": "need_not_race", "theme": "Te Tiriti & democracy", "text": "Public services and funding should be allocated by need only, never targeted by ethnicity.", "pos": {
+      "act": [2, "If two New Zealanders have the same need, government should treat them the same.", "https://www.act.org.nz/equal-service"],
+      "lab": [-1, "Labour will invest $21 million a year in Māori-led training that helps more whānau Māori gain skills and move into good, well-paid work", "https://www.labour.org.nz/maori-trades-training"],
+      "top": [-1, "stable multi-year commissioning for kaupapa Māori and iwi-led providers", "https://www.opportunity.org.nz/healthy_people"],
+      "grn": [-2, "Devolve power and redistribute resources back to tangata whenua", "https://www.greens.org.nz/manifesto_2026_maori_centred"],
+      "tpm": [-2, "As Māori make up 50% of the social housing waiting list, we must ensure that half of all new social housing is allocated to whānau Māori.", "https://www.maoriparty.org.nz/housing"]
+    }},
+    {"id": "maori_seats", "theme": "Te Tiriti & democracy", "text": "There should be a referendum on whether to keep the Māori electorate seats.", "pos": {
+      "nzf": [2, "The time has come for a decision on the future of the Māori seats.", "https://www.nzfirst.nz/referendum_on_maori_seats"],
+      "grn": [-2, "Entrench the Māori electoral seats to guarantee Māori representation in Parliament", "https://www.greens.org.nz/manifesto_2026_democracy"]
+    }},
+    {"id": "donations", "theme": "Te Tiriti & democracy", "text": "Political donations should be capped, and only individual voters (not companies or trusts) should be allowed to donate.", "pos": {
+      "top": [2, "Ban donations from companies and trusts, so only registered New Zealand voters can donate.", "https://www.opportunity.org.nz/clean_up_politics"],
+      "grn": [2, "Reform electoral funding by limiting donations to registered voters, increasing public financing of campaigns and capping a donor’s donations", "https://www.greens.org.nz/manifesto_2026_democracy"]
+    }},
+    {"id": "migrant_benefits", "theme": "Immigration & justice", "text": "Migrants should have to live here longer before they can get welfare benefits.", "pos": {
+      "nzf": [2, "New Zealand First will implement a 10-year welfare stand-down period for all visa holders", "https://www.nzfirst.nz/immigration_reform_policies"],
+      "act": [2, "ACT will introduce a five-year welfare stand-down for all residence class visa holders.", "https://www.act.org.nz/deport"],
+      "nat": [2, "From 1 April 2028, the minimum residence period for main benefits will increase from two years to five years.", "https://www.national.org.nz/policies/walfare"]
+    }},
+    {"id": "immigration_cap", "theme": "Immigration & justice", "text": "The number of residence visas issued each year should be capped at a much lower level.", "pos": {
+      "nzf": [2, "A resident visa cap of 20,000 per year.", "https://www.nzfirst.nz/immigration_reform_policies", "Proposed as a referendum question."],
+      "act": [-1, "New Zealand still needs immigration.", "https://www.act.org.nz/fair-contribution"],
+      "grn": [-2, "The Green Party will create fair and achievable pathways to residency for all people coming here to work", "https://www.greens.org.nz/manifesto_2026_immigration_and_refugees"]
+    }},
+    {"id": "sentencing", "theme": "Immigration & justice", "text": "Tougher sentences, such as three-strikes laws, are the right way to reduce crime.", "pos": {
+      "act": [2, "Anyone convicted of burglary three times would receive a minimum sentence of three years in prison, with no parole, no home detention, and no early release.", "https://www.act.org.nz/burglary"],
+      "nat": [2, "A vote for National is a vote for real consequences for crime.", "https://www.national.org.nz/policies/tougher-sentences"],
+      "top": [-1, "Tough-on crime is a slogan for short-term political gain.", "https://www.opportunity.org.nz/smart_on_crime"],
+      "grn": [-2, "Enable judicial discretion in sentencing, including by abolishing mandatory minimum sentences, life sentences, preventive detention, limits on sentence discounts, three strikes", "https://www.greens.org.nz/manifesto_2026_justice_and_community_safety"],
+      "tpm": [-2, "Te Pāti Māori commits to the abolition of prisons by 2040", "https://www.maoriparty.org.nz/justice"]
+    }},
+    {"id": "drugs", "theme": "Immigration & justice", "text": "Drug use should be treated as a health issue, with legal, regulated cannabis.", "pos": {
+      "grn": [2, "treats drug use as a health issue and provides for regulated access to cannabis for personal use.", "https://www.greens.org.nz/manifesto_2026_drug_law_reform"],
+      "top": [2, "Regulate recreational use of cannabis to undercut organised crime and reduce youth incarceration.", "https://www.opportunity.org.nz/smart_on_crime"],
+      "tpm": [2, "Overhaul Misuse of Drugs Act so that drug use is treated as a health issue.", "https://www.maoriparty.org.nz/justice"]
+    }},
+    {"id": "free_gp", "theme": "Health, housing & services", "text": "The government should make GP (doctor) visits free.", "pos": {
+      "lab": [2, "Three free doctor's visits a year for everyone.", "https://www.labour.org.nz/our-policies/"],
+      "tpm": [2, "Invest in free primary healthcare for all whānau", "https://www.maoriparty.org.nz/health"],
+      "grn": [1, "Work towards a publicly delivered, fully free provision of dental and primary care services", "https://www.greens.org.nz/manifesto_2026_health", "A goal to work towards."]
+    }},
+    {"id": "pt_fares", "theme": "Health, housing & services", "text": "Public transport fares should be capped low or made free.", "pos": {
+      "lab": [2, "$20 a week is the most you'll pay to get around by bus or train under Labour.", "https://www.labour.org.nz/our-policies/"],
+      "grn": [2, "Immediately lower the fare price for bus and train trips per trip to $2 for any one trip for adults taking public transport.", "https://www.greens.org.nz/connect_aotearoa"],
+      "tpm": [2, "Extend free public transport to everyone within 5 years.", "https://www.maoriparty.org.nz/cost_of_living"]
+    }},
+    {"id": "rent", "theme": "Health, housing & services", "text": "The law should limit how much rents can rise each year.", "pos": {
+      "grn": [2, "Make rents more affordable by limiting annual rent increases to no more than 2%", "https://www.greens.org.nz/manifesto_2026_housing"],
+      "tpm": [2, "Once frozen, rents will only be allowed to increase by the rate of inflation each year", "https://www.maoriparty.org.nz/housing"]
+    }},
+    {"id": "state_housing", "theme": "Health, housing & services", "text": "The government should build many more state houses.", "pos": {
+      "lab": [2, "We will allocate $2.9 billion of capital for Kāinga Ora to build more state houses.", "https://www.labour.org.nz/start-work-now"],
+      "grn": [2, "Build tens of thousands of new public homes", "https://www.greens.org.nz/manifesto_2026_housing"],
+      "tpm": [2, "We are committed to building more social housing in Aotearoa and to stopping the discount sale of existing state homes to private investors.", "https://www.maoriparty.org.nz/housing"],
+      "top": [1, "Direct Kāinga Ora to build the mix of housing each region actually needs", "https://www.opportunity.org.nz/affordable_housing"]
+    }},
+    {"id": "pay_equity", "theme": "Health, housing & services", "text": "Pay equity law should be restored so workers in female-dominated jobs can claim fairer pay.", "pos": {
+      "lab": [2, "pay equity legislation restored in the first 100 days", "https://www.labour.org.nz/our-policies/"],
+      "grn": [2, "undoing the Government’s changes to the pay equity regime and resuming claims", "https://www.greens.org.nz/manifesto_2026_workforce_rights"],
+      "tpm": [2, "Restore pay equity and ensure that Māori are paid equitably.", "https://www.maoriparty.org.nz/cost_of_living"]
+    }},
+    {"id": "alliances", "theme": "Foreign affairs", "text": "New Zealand should pull back from military alliances such as Five Eyes and take a neutral foreign policy.", "pos": {
+      "tpm": [2, "Legislate neutrality and prohibit participation in foreign wars unless directly threatened.", "https://www.maoriparty.org.nz/military_neutrality"],
+      "grn": [2, "Decouple military and security frameworks from the United States, including declining to participate in AUKUS and withdrawing from Five Eyes.", "https://www.greens.org.nz/manifesto_2026_global_affairs_and_trade"]
+    }}
+  ]
+}
